@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <assert.h>
 #include "ArrayDefinitions.h"
 #include "InputImages.h"
 
@@ -17,7 +18,31 @@ int relu(int x)
     return (x > 0) ? x : 0;
 }
 
+void softmax(double* input, size_t size) {
 
+    assert(0 <= size <= sizeof(input) / sizeof(double));
+
+    int i;
+    double m, sum, constant;
+
+    m = -INFINITY;
+    for (i = 0; i < size; ++i) {
+        if (m < input[i]) {
+            m = input[i];
+        }
+    }
+
+    sum = 0.0;
+    for (i = 0; i < size; ++i) {
+        sum += exp(input[i] - m);
+    }
+
+    constant = m + log(sum);
+    for (i = 0; i < size; ++i) {
+        input[i] = exp(input[i] - constant);
+    }
+
+}
 
 
 int main(void)
@@ -48,4 +73,12 @@ int main(void)
 
         printf("prediction for it to be %d is %g \n", i, output[i]);
     }
+
+    softmax(output, numOutputs);
+    //To print
+    // printf("Softmax Array: ");
+    // for (int i = 0; i < numOutputs; ++i)
+    //     printf("%lf ", output[i]);
+    // printf("\n\n");
+    
 }
