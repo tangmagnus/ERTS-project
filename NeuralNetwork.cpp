@@ -9,5 +9,4 @@ int main(void) {
 	newNetwork.forward();
 	newNetwork.outActiviation_softMax();
 
-  
 }

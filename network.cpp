@@ -10,7 +10,6 @@ Network::Network(double input_array[]) {
 }
 
 
-
 //reLu activation function
 int Network::reLU(int x) {
 	return (x > 0) ? x : 0;
