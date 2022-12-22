@@ -1,7 +1,7 @@
 #ifndef NETWORK 
 #define NETWORK_H
 
-#include <systemc.h>
+//#include <systemc.h>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
