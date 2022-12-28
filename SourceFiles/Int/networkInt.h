@@ -17,14 +17,13 @@
 
 
 class Network {
-protected:
-    Network(void):digitis(100)
+private:
+    static Network* network_;
+    
+    Network()
     {
     }
-    static Network* network_;
-
-
-private:
+    
     int digitis;
 
     int input[numInputs];
@@ -33,23 +32,12 @@ private:
 
 public:
 
-    /**
-         * Singletons should not be cloneable.
-         */
-    Network(Network& other) = delete;
-    /**
-     * Singletons should not be assignable.
-     */
-    void operator=(const Network&) = delete;
-    /**
-     * This is the static method that controls the access to the singleton
-     * instance. On the first run, it creates a singleton object and places it
-     * into the static field. On subsequent runs, it returns the client existing
-     * object stored in the static field.
-     */
-     //constructor
-
-    static Network* GetInstance();
+    Network(const Network& other) = delete;
+    
+    static Network *Network::GetInstance()
+    {
+        return network_;
+    }
 
     //network functions
     //reLu activation function
@@ -109,30 +97,16 @@ public:
         }
         return element;
 
-        /*for (int i = 0; i < numOutputs; i++)
-        {
-            printf("Label: %d - Probability: %d \n", i, intOutput[i]);
-        }*/
     }
 
 };
 
-Network* Network::network_ = nullptr;;
+Network *Network::network_ = new Network();
 
 /**
  * Static methods should be defined outside the class.
  */
-Network *Network::GetInstance()
-{
-    /**
-     * This is a safer way to create an instance. instance = new Singleton is
-     * dangeruous in case two instance threads wants to access at the same time
-     */
-    if(network_== nullptr){
-    	network_ = new Network();
-    }
-    return network_;
-}
+
 
 #endif 
 
