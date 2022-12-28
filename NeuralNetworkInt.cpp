@@ -5,7 +5,7 @@
 
 
 int main(void) {
-	Network newNetwork(test_array);
+	Network newNetwork(test_array0);
 	newNetwork.forward();
 	newNetwork.outActiviation_softMax();
 

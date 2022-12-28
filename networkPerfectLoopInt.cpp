@@ -128,7 +128,7 @@ void Network::forward() {
 
     for (int i = 0; i < numOutputs; i++)
     {
-        printf("Label: %d - Probability: %lld \n", i, intOutput[i]);
+        printf("Label: %d - Probability: %d \n", i, intOutput[i]);
     }
        
 }

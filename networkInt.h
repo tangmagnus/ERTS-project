@@ -32,9 +32,9 @@ class Network {
 private:
     int digitis = 1000;
 
-    long long int input[numInputs];
-    long long int hiddenLayer[numHiddenNodes] = {};
-    long long int intOutput[numOutputs] = {};
+    int input[numInputs];
+    int hiddenLayer[numHiddenNodes] = {};
+    int intOutput[numOutputs] = {};
 
 public:
     //network functions
