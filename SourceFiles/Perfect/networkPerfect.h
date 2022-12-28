@@ -23,7 +23,7 @@ private:
 public:
     //network functions
     float reLU(float x);
-    //void outActiviation_softMax();
+    void outActiviation_softMax();
     void forward();
 
     //constructor

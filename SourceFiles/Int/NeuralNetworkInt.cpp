@@ -5,8 +5,8 @@
 
 
 int main(void) {
-	Network newNetwork(two_array);
+	Network newNetwork(test_array2);
 	newNetwork.forward();
-	//newNetwork.outActiviation_softMax();
+	newNetwork.outActiviation_softMax();
 
 }

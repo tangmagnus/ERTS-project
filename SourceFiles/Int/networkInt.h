@@ -13,9 +13,10 @@
 #define numHiddenNodes 30
 #define numOutputs 18
 
+
 class Network {
 private:
-    int digits = 1000;
+    int digitis = 100;
 
     int input[numInputs];
     int hiddenLayer[numHiddenNodes] = {};
@@ -32,3 +33,4 @@ public:
 };
 
 #endif 
+
