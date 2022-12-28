@@ -17,13 +17,12 @@
 
 
 class Network {
-private:
-    static Network* network_;
-    
-    Network()
-    {
-    }
-    
+protected:
+    Network();
+    Network(const Network&);
+    Network& operator=(const Network&);
+    ~Network();
+private:    
     int digitis;
 
     int input[numInputs];
@@ -32,11 +31,10 @@ private:
 
 public:
 
-    Network(const Network& other) = delete;
-    
-    static Network *Network::GetInstance()
+    static Network& Instance()
     {
-        return network_;
+        static Network inst;
+        return inst;
     }
 
     //network functions
@@ -101,12 +99,6 @@ public:
     }
 
 };
-
-Network *Network::network_ = new Network();
-
-/**
- * Static methods should be defined outside the class.
- */
 
 
 #endif 
