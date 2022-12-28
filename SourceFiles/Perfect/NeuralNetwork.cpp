@@ -7,6 +7,6 @@
 int main(void) {
 	NetworkPerfect newNetwork(two_array);
 	newNetwork.forward();
-	newNetwork.outActiviation_softMax();
+	//newNetwork.outActiviation_softMax();
 
 }
