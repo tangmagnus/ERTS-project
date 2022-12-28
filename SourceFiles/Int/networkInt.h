@@ -47,6 +47,7 @@ public:
     //void outActiviation_softMax();
     int forward(float input_array[numInputs])
     {
+        digitis = 100;
         if (input_array == NULL)
         {
             return -1;
