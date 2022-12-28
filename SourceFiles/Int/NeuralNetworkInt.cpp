@@ -4,7 +4,7 @@
 #include "InputImages.h"
 
 int NeuralNetwork(float img_array[numInputs]) {
-	Network *network = Network::GetInstance();
+	Network network = Network::Instance();
 	int res = network->forward(img_array);
 	return res;
 }
