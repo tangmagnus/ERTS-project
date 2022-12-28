@@ -3,10 +3,8 @@
 #include "ArrayDefinitionsInt.h"
 
 //constructor
-Network::Network(float input_array[]) {
-    for (int i = 0; i < numInputs; i++) {
-        input[i] = static_cast<int>(input_array[i] * digitis);
-    }
+Network::Network() {
+	digitis = 100;
 }
 
 
@@ -17,7 +15,7 @@ int Network::reLU(int x) {
 
 
 //softmax function to get probabilities in range [0,1]
-void Network::outActiviation_softMax() {
+/*void Network::outActiviation_softMax() {
     int element = 0;
     for (int i = 0; i < numOutputs; i++)
     {
@@ -25,52 +23,65 @@ void Network::outActiviation_softMax() {
             element = i;
     }
     printf("\nThe number is Label: %d\n", element);
-}
+}*/
 
 //calculation of network layers
-void Network::forward() {
-    
-    double sum1[numHiddenNodes];
+int Network::forward(float input_array[numInputs]) {
 
-    int lasti = -1;
+	if(input_array == NULL)
+	{
+		return -1;
+	}
+	for (int i = 0; i < numInputs; i++) {
+		input[i] = static_cast<int>(input_array[i] * digitis);
+	}
+
+    int sum1[numHiddenNodes];
+
+    for (int i = 0; i < numHiddenNodes; i++)
+    {
+        sum1[i] = fc1_bias[i];
+        if (i < numOutputs)
+        {
+            intOutput[i] = fc2_bias[i];
+        }
+        
+    }
+
     for (int i = 0; i < numHiddenNodes; i++)
     {   
-        for (int j = 0; j < numInputs; j++)
+        fc1_inner:for (int j = 0; j < numInputs; j++)
         {
-            if (lasti < i)
-            {
-                lasti = i;
-                sum1[i] = fc1_bias[i];
-                if (i > 0)
-                {
-                    hiddenLayer[i-1] = reLU(sum1[i-1]);
-                }
-                
-            }
             sum1[i] += input[j] * fc1_weights[i][j];            
         }
     }
 
-    hiddenLayer[numHiddenNodes - 1] = reLU(sum1[numHiddenNodes - 1]);
+    for (int i = 0; i < numHiddenNodes; i++)
+    {
+        hiddenLayer[i] = reLU(sum1[i]);
+    }
 
-    lasti = -1;
+
     for (int i = 0; i < numOutputs; i++)
     {
-        for (int j = 0; j < numHiddenNodes; j++)
+        fc2_inner:for (int j = 0; j < numHiddenNodes; j++)
         {
-            if (lasti < i)
-            {
-                lasti = i;
-                intOutput[i] = fc2_bias[i];
-            }
             intOutput[i] += hiddenLayer[j] * fc2_weights[i][j];
         } 
     }
     
+    int element = 0;
     for (int i = 0; i < numOutputs; i++)
     {
-        printf("Label: %d - Probability: %d \n", i, intOutput[i]);
+    	if (intOutput[element] < intOutput[i])
+        element = i;
     }
+    return element;
+
+    /*for (int i = 0; i < numOutputs; i++)
+    {
+        printf("Label: %d - Probability: %d \n", i, intOutput[i]);
+    }*/
      
 }
 
