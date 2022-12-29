@@ -1,11 +1,13 @@
-#include "NeuralNetworkInt.cpp"
 #include "InputImages.h"
+#include "NeuralNetworkInt.hpp"
 
 int main(void) {
 
-	if(NeuralNetwork(test_array0) == 0)
+	int res = NeuralNetwork(test_array0);
+
+	if(res == 0)
 	{
-		return 1;
+		return 0;
 	}
 
 }

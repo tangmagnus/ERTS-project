@@ -18,12 +18,12 @@
 
 class Network {
 protected:
-    Network();
-    Network(const Network&);
-    Network& operator=(const Network&);
-    ~Network();
+
 private:    
-    int digitis;
+	Network(){};
+	Network(Network const&);
+	void operator=(Network const&);
+	//~Network();
 
     int input[numInputs];
     int hiddenLayer[numHiddenNodes];
@@ -39,13 +39,13 @@ public:
 
     //network functions
     //reLu activation function
-    int reLU(int x) {
+    int reLU(int const& x) {
         return (x > 0) ? x : 0;
     }
     //void outActiviation_softMax();
     int forward(float input_array[numInputs])
     {
-        digitis = 100;
+        int digitis = 100;
         if (input_array == NULL)
         {
             return -1;
@@ -99,6 +99,7 @@ public:
     }
 
 };
+
 
 
 #endif 

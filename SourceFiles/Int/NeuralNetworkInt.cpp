@@ -1,14 +1,8 @@
 // NeuralNetwork.cpp : This file contains the 'main' function. Program execution begins and ends there.
-
-#include "networkInt.h"
-#include "InputImages.h"
+#include "NeuralNetworkInt.hpp"
 
 int NeuralNetwork(float img_array[numInputs]) {
-	Network network = Network::Instance();
-	int res = network->forward(img_array);
-	return res;
+	return Network::Instance().forward(img_array);
+
 }
 
-int main(void) {
-	NeuralNetwork(test_array0);
-}
