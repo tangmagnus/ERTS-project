@@ -5,6 +5,5 @@
 
 int main() 
 {
-	Network network = Network();
-	printf("%d", network.forward(test_array0));
+	printf("%d", Network::Instance().forward(test_array0));
 }

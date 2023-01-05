@@ -17,9 +17,20 @@
 
 
 class Network {
-private:
+private:    
+	Network(){};
+	Network(Network const&);
+	void operator=(Network const&);
+	//~Network();
+
 
 public:
+
+    static Network& Instance()
+    {
+        static Network inst;
+        return inst;
+    }
 
     //network functions
     //reLu activation function
