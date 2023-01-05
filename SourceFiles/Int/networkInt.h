@@ -17,17 +17,12 @@
 
 
 class Network {
-protected:
-
 private:    
 	Network(){};
 	Network(Network const&);
 	void operator=(Network const&);
 	//~Network();
 
-    int input[numInputs];
-    int hiddenLayer[numHiddenNodes];
-    int intOutput[numOutputs];
 
 public:
 
@@ -39,22 +34,17 @@ public:
 
     //network functions
     //reLu activation function
-    int reLU(int const& x) {
+    int reLU(int x) {
         return (x > 0) ? x : 0;
     }
     //void outActiviation_softMax();
-    int forward(float input_array[numInputs])
+    int forward(int input_array[numInputs])
     {
-        int digitis = 100;
-        if (input_array == NULL)
-        {
-            return -1;
-        }
-        for (int i = 0; i < numInputs; i++) {
-            input[i] = static_cast<int>(input_array[i] * digitis);
-        }
-
+        int hiddenLayer[numHiddenNodes];
+        int intOutput[numOutputs];
         int sum1[numHiddenNodes];
+        int digitis = 100;
+
 
         for (int i = 0; i < numHiddenNodes; i++)
         {
@@ -68,10 +58,10 @@ public:
 
         for (int i = 0; i < numHiddenNodes; i++)
         {
-        fc1_inner:for (int j = 0; j < numInputs; j++)
-        {
-            sum1[i] += input[j] * fc1_weights[i][j];
-        }
+            for (int j = 0; j < numInputs; j++)
+            {
+                sum1[i] += input_array[j] * fc1_weights[i][j];
+            }
         }
 
         for (int i = 0; i < numHiddenNodes; i++)
@@ -82,10 +72,10 @@ public:
 
         for (int i = 0; i < numOutputs; i++)
         {
-        fc2_inner:for (int j = 0; j < numHiddenNodes; j++)
-        {
-            intOutput[i] += hiddenLayer[j] * fc2_weights[i][j];
-        }
+            for (int j = 0; j < numHiddenNodes; j++)
+            {
+                intOutput[i] += hiddenLayer[j] * fc2_weights[i][j];
+            }
         }
 
         int element = 0;
@@ -94,8 +84,8 @@ public:
             if (intOutput[element] < intOutput[i])
                 element = i;
         }
-        return element;
 
+        return element;
     }
 
 };

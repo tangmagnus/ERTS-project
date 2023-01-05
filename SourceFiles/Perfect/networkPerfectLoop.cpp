@@ -18,7 +18,7 @@ float NetworkPerfect::reLU(float x) {
 
 
 //softmax function to get probabilities in range [0,1]
-/*void NetworkPerfect::outActiviation_softMax() {
+void NetworkPerfect::outActiviation_softMax() {
 
     assert(0 <= numOutputs <= sizeof(output) / sizeof(double));
 
@@ -48,27 +48,19 @@ float NetworkPerfect::reLU(float x) {
         printf("Label: %d - Probability: %lf ", i, output[i]);
         printf("\n");
     }
-}*/
+}
 
 
 //calculation of network layers
 void NetworkPerfect::forward() {
     
     float sum1[numHiddenNodes];
-    
-    for (int i = 0; i < numHiddenNodes; i++)
-    {
-    	sum1[i] = fc1_bias[i];
-    	if(i < numOutputs)
-    	{
-    		output[i] = fc2_bias[i];
-    	}
-    }
 
     //step 2: calculate hidden layer
-    forward_label10:for (int i = 0; i < numHiddenNodes; i++)
+    for (int i = 0; i < numHiddenNodes; i++)
     {
-        forward_label0:for (int j = 0; j < numInputs; j++)
+        sum1[i] = fc1_bias[i];
+        for (int j = 0; j < numInputs; j++)
         {
             sum1[i] += input[j] * fc1_weights[i][j];
         }
@@ -82,17 +74,18 @@ void NetworkPerfect::forward() {
     //step 4: calculate output layer
     for (int i = 0; i < numOutputs; i++)
     {
-        forward_label1:for (int j = 0; j < numHiddenNodes; j++)
+        output[i] = fc2_bias[i];
+        for (int j = 0; j < numHiddenNodes; j++)
         {
             output[i] += hiddenLayer[j] * fc2_weights[i][j];
         }  
     }
 
     
-    /*for (int i = 0; i < numOutputs; i++)
+    for (int i = 0; i < numOutputs; i++)
     {
         printf("Label: %d - Probability: %g \n", i, output[i]);
-    }*/
+    }
     
        
 }
