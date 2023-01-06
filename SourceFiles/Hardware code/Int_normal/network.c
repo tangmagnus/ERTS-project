@@ -35,41 +35,29 @@ int forward(int input_array[numInputs])
     for (i = 0; i < numHiddenNodes; i++)
     {
         sum1[i] = fc1_bias[i];
-        if (i < numOutputs)
+        for (j = 0; j < numInputs; j++)
         {
-            intOutput[i] = fc2_bias[i];
+            sum1[i] += input_array[j] * fc1_weights[i][j];
         }
-
-    }
-
-    for (i = 0; i < numHiddenNodes; i++)
-    {
-    fc1_inner:for (j = 0; j < numInputs; j++)
-    {
-        sum1[i] += input_array[j] * fc1_weights[i][j];
-    }
-    }
-
-    for (i = 0; i < numHiddenNodes; i++)
-    {
         hiddenLayer[i] = reLU(sum1[i]);
     }
 
 
     for (i = 0; i < numOutputs; i++)
     {
-    fc2_inner:for (j = 0; j < numHiddenNodes; j++)
-    {
-        intOutput[i] += hiddenLayer[j] * fc2_weights[i][j];
-    }
+        intOutput[i] = fc2_bias[i];
+        for (j = 0; j < numHiddenNodes; j++)
+        {
+            intOutput[i] += hiddenLayer[j] * fc2_weights[i][j];
+        }
     }
 
     int element = 0;
     for (i = 0; i < numOutputs; i++)
-    {
-        if (intOutput[element] < intOutput[i])
-            element = i;
-    }
+        {
+            if (intOutput[element] < intOutput[i])
+                element = i;
+        }
     return element;
 
 }
